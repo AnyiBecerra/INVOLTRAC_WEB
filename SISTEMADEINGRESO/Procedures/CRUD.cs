@@ -17,6 +17,7 @@ namespace SISTEMADEINGRESO.Procedures
 
             string Query = "SELECT * FROM Personas";
 
+
             using (SqlConnection cn = new SqlConnection(cadena))
             {
                 SqlCommand cmd = new SqlCommand(Query, cn);
