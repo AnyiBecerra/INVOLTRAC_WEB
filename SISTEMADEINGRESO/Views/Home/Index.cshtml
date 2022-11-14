@@ -1,0 +1,253 @@
+﻿@model IEnumerable<SISTEMADEINGRESO.Models.Personas>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Usuarios</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
+
+    <style>
+        table thead {
+            background-color: #5995fd;
+            color: white;
+        }
+        h2 {
+            text-align: center;
+            padding: 50px;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Usuarios</h2>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="Personas" class="table table-bordered  display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombres</th>
+                            <th>Apellido1</th>
+                            <th>Apellido2</th>
+                            <th>Ciudad</th>
+                            <th>Departamento</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var i in Model)
+                        {
+                            <tr>
+                                <td>@i.Documento</td>
+                                <td>@i.Nombres</td>
+                                <td>@i.Apellido1</td>
+                                <td>@i.Apellido2</td>
+                                <td>@i.Ciudad</td>
+                                <td>@i.Departamento</td>
+                                <td>@i.Direccion</td>
+                                <td>@i.Celular</td>
+                                <td>@i.Email</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Documento</th>
+                            <th>Nombres</th>
+                            <th>Apellido1</th>
+                            <th>Apellido2</th>
+                            <th>Ciudad</th>
+                            <th>Departamento</th>
+                            <th>Direccion</th>
+                            <th>Celular</th>
+                            <th>Email</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#Personas').DataTable({
+                responsive: true,
+                language: espanol
+            });
+        });
+        let espanol = {
+            "autoFill": {
+                "cancel": "Cancelar"
+            },
+            "buttons": {
+                "collection": "Coleccion",
+                "colvis": "Columna Visible",
+                "colvisRestore": "Restaurar Columnas Visibles",
+                "copy": "Copiar",
+                "copyKeys": "presiones inicio + c para copiar ka infrocion de la tabla.  click en este mensaje para salir o esc.",
+                "copySuccess": {
+                    "_": "Copiado con exito",
+                    "1": "Fila copiada con exito"
+                },
+                "copyTitle": "Tabla Copiada",
+                "createState": "Crear estado",
+                "pageLength": {
+                    "_": "ver %d filas",
+                    "-1": "Ver todas las Filas",
+                    "1": "Ver solo una fila"
+                },
+                "print": "Impresion",
+                "removeAllStates": "Remover todos los estados",
+                "removeState": "Remover",
+                "renameState": "Renombrar",
+                "savedStates": "Guardar Estado",
+                "stateRestore": "Restaurar %d",
+                "updateState": "Actualizar",
+                "csv": "CSV",
+                "excel": "Excel",
+                "pdf": "PDF"
+            },
+            "datetime": {
+                "hours": "hora",
+                "minutes": "minuto",
+                "months": {
+                    "0": "Enero",
+                    "1": "Febrero",
+                    "10": "Noviembre",
+                    "11": "Diciembre",
+                    "2": "Marzo",
+                    "3": "Abril",
+                    "4": "Mayo",
+                    "5": "Junio",
+                    "6": "Julio",
+                    "7": "Agosto",
+                    "8": "Septiembre",
+                    "9": "Octubre"
+                },
+                "next": "siguiente",
+                "previous": "anterior",
+                "seconds": "segundo",
+                "weekdays": [
+                    "Dom",
+                    "Lun",
+                    "Mar",
+                    "Mir",
+                    "Jue",
+                    "Vie",
+                    "sab"
+                ],
+                "unknown": "desconocido",
+                "amPm": [
+                    "am",
+                    "pm"
+                ]
+            },
+            "editor": {
+                "close": "Cerrar",
+                "create": {
+                    "button": "Nuevo",
+                    "submit": "Crear",
+                    "title": "Crerar nueva entrada"
+                },
+                "edit": {
+                    "button": "Editar",
+                    "submit": "Actualizar",
+                    "title": "Editar Registro"
+                },
+                "error": {
+                    "system": "a ocurrido un error "
+                },
+                "multi": {
+                    "restore": "revertir cambios",
+                    "info": "Los elementos seleccionados contienen diferentes valores para esta entrada. Para editar y configurar todos los elementos de esta entrada en el mismo valor, haga clic o toque aquí, de lo contrario, conservar sus valores individuales.",
+                    "noMulti": "Múltiples valores"
+                },
+                "remove": {
+                    "button": "Borrar",
+                    "confirm": {
+                        "_": "esta seguro de eliminar %d los registros",
+                        "1": "esta seguro de eliminar el registro"
+                    },
+                    "submit": "Borrar",
+                    "title": "Borrar"
+                }
+            },
+            "emptyTable": "Tabla Vacia",
+            "info": "informacion",
+            "infoEmpty": "Sin informacion",
+            "lengthMenu": "Entradas",
+            "loadingRecords": "Cargando...",
+            "paginate": {
+                "first": "primero",
+                "last": "ultimo",
+                "next": "siguiente",
+                "previous": "anterior"
+            },
+            "processing": "Procesando",
+            "search": "Busqueda",
+            "searchBuilder": {
+                "add": "agragar condicion",
+                "button": {
+                    "_": "Creador de búsquedas (%d)",
+                    "0": "Creador de búsquedas"
+                },
+                "clearAll": "Quitar filtro",
+                "condition": "Condicion",
+                "data": "Datos",
+                "deleteTitle": "eliminar regla",
+                "logicAnd": "Y",
+                "logicOr": "O",
+                "value": "Valor"
+            },
+            "searchPanes": {
+                "clearMessage": "Borrar Filtro",
+                "collapseMessage": "desplegar todo",
+                "emptyPanes": "No hay informacion",
+                "loadMessage": "Cargando informacion",
+                "showMessage": "Mostrar todos",
+                "title": "Filtros Activos - %d"
+            },
+            "searchPlaceholder": "Busqueda en tabla",
+            "select": {
+                "cells": {
+                    "_": "%d celdas seleccionadas",
+                    "1": "1 celda seleccionada"
+                },
+                "columns": {
+                    "_": "%d columnas seleccionadas",
+                    "1": "1 columna seleccionada"
+                }
+            },
+            "zeroRecords": "No se encontro informacion"
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
