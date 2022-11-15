@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista Usuarios</title>
 
+    @*<link href="~/Content/bootstrap.min.css" rel="stylesheet" />*@
+    @*<link href="~/Content/DataTable.css" rel="stylesheet" />*@
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css">
@@ -20,6 +23,7 @@
             background-color: #5995fd;
             color: white;
         }
+
         h2 {
             text-align: center;
             padding: 50px;
@@ -28,7 +32,9 @@
 
 </head>
 <body>
-    <h2>Usuarios</h2>
+    <h1>Registro de Empleados</h1>
+
+    <h2>Crear Empleado Nuevo<button onclick="CrearEmpleado()" class="btn btn-primary"><i class="fa fa-plus"></i></button></h2>
 
     <div class="container">
         <div class="row">
@@ -41,10 +47,9 @@
                             <th>Apellido1</th>
                             <th>Apellido2</th>
                             <th>Ciudad</th>
-                            <th>Departamento</th>
                             <th>Direccion</th>
                             <th>Celular</th>
-                            <th>Email</th>
+                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,27 +61,96 @@
                                 <td>@i.Apellido1</td>
                                 <td>@i.Apellido2</td>
                                 <td>@i.Ciudad</td>
-                                <td>@i.Departamento</td>
                                 <td>@i.Direccion</td>
                                 <td>@i.Celular</td>
-                                <td>@i.Email</td>
+                                <td>
+                                    <button onclick=Eliminar(@i.Id) class="btn btn-primary"><i class="fa fa-trash"></i></button>
+                                </td>
                             </tr>
                         }
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Documento</th>
-                            <th>Nombres</th>
-                            <th>Apellido1</th>
-                            <th>Apellido2</th>
-                            <th>Ciudad</th>
-                            <th>Departamento</th>
-                            <th>Direccion</th>
-                            <th>Celular</th>
-                            <th>Email</th>
-                        </tr>
-                    </tfoot>
                 </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="ModalEmpleado">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="modalTitle">Añadir un nuevo Empleado</h5>
+                    <button onclick="CerrarModal('#ModalEmpleado','form-crearempleado')" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="@Url.Action("CrearEmpleado","Home")" enctype="multipart/form-data" method="post" id="form-crearempleado">
+
+                        <div class="mb-3">
+                            <label class="col-form-label">Cédula:</label>
+                            <input type="text" class="form-control" name="Cedula" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Nombres:</label>
+                            <input type="text" class="form-control" name="Nombres" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Primer Apellido:</label>
+                            <input type="text" class="form-control" name="Apellido1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Segundo Apellido:</label>
+                            <input type="text" class="form-control" name="Apellido2">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Ciudad:</label>
+                            <input type="text" class="form-control" name="Ciudad">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Departamento:</label>
+                            <input type="text" class="form-control" name="Departamento">
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Dirección:</label>
+                            <input type="text" class="form-control" name="Direccion" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Celular:</label>
+                            <input type="tel" class="form-control" name="Celular" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="col-form-label">Correo Electrónico:</label>
+                            <input type="email" class="form-control" name="Correo" />
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">Guardar</button>
+                    <button type="button" onclick="CerrarModal('#ModalEmpleado','form-crearempleado')" class="btn btn-primary">Cerrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Eliminar">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Eliminar</h5>
+                    <button onclick="CerrarModal('#Eliminar')" class="btn-close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="@Url.Action("EliminarEmpleado","Home")" method="post">
+
+                        <p>Estás seguro de que deseas eliminar?</p>
+                        <div id="IdEliminar"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">Eliminar</button>
+                    <button type="button" onclick="CerrarModal('#Eliminar')" class="btn btn-primary">Cerrar</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -88,6 +162,34 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+
+    <script>
+        function AbrirModal(Modal) {
+            $(Modal).modal('show');
+        }
+
+        function CerrarModal(Modal, Formulario) {
+            if (Formulario != null) {
+                let formulario = document.getElementById(Formulario);
+                formulario.reset();
+            }
+            $(Modal).modal('hide');
+        }
+
+        function CrearEmpleado() {
+            AbrirModal('#ModalEmpleado');
+        }
+
+        function Eliminar(Id) {
+            enti = document.getElementById('IdEliminar');
+
+            enti.innerHTML = "<input type=\"hidden\" name=\"Id\" value=\"" + Id + "\" />";
+
+            AbrirModal('#Eliminar');
+        }
+    </script>
 
     <script>
         $(document).ready(function () {
